@@ -1,5 +1,6 @@
 FROM alpine:3.7
 
+ENV HOME=/backup
 RUN apk update && \
   apk add --update \
     bash \
@@ -26,7 +27,7 @@ RUN apk update && \
   rm -rf /var/cache/apk/*
 
 RUN pip install ijson awscli
-RUN adduser -h /backup -D backup
+RUN groupadd -r backup && adduser -h /backup -s /sbin/nologin -D -g backup backup
 
 ENV KUBECTL_VERSION 1.12.0
 ENV KUBECTL_SHA256 ba0f8d5776d84ffef5ce5d5c31f8d892e0c13d073948d5bafbb5341ad68ef463
@@ -38,6 +39,6 @@ RUN echo "${KUBECTL_SHA256}  kubectl" | sha256sum -c - || exit 10
 ENV PATH="/:${PATH}"
 
 COPY entrypoint.sh /
-USER backup
 WORKDIR /backup
+USER backup
 ENTRYPOINT ["/entrypoint.sh"]
