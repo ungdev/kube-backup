@@ -39,4 +39,5 @@ ENV PATH="/:${PATH}"
 
 COPY entrypoint.sh /
 USER backup
+WORKDIR /backup
 ENTRYPOINT ["/entrypoint.sh"]
