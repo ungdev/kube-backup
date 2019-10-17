@@ -27,7 +27,7 @@ RUN apk update && \
   rm -rf /var/cache/apk/*
 
 RUN pip install ijson awscli
-RUN groupadd -r backup && adduser -h /backup -s /sbin/nologin -D -g backup backup
+RUN adduser -h /backup -s /sbin/nologin -D -g backup backup
 
 ENV KUBECTL_VERSION 1.12.0
 ENV KUBECTL_SHA256 ba0f8d5776d84ffef5ce5d5c31f8d892e0c13d073948d5bafbb5341ad68ef463
