@@ -1,6 +1,5 @@
 FROM alpine:3.7
 
-ENV HOME=/backup
 RUN apk update && \
   apk add --update \
     bash \
@@ -32,6 +31,7 @@ RUN adduser -h /backup -s /sbin/nologin -D -g backup backup
 ENV KUBECTL_VERSION 1.12.0
 ENV KUBECTL_SHA256 ba0f8d5776d84ffef5ce5d5c31f8d892e0c13d073948d5bafbb5341ad68ef463
 ENV KUBECTL_URI https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl
+ENV HOME /backup
 
 RUN curl -SL ${KUBECTL_URI} -o kubectl && chmod +x kubectl
 
