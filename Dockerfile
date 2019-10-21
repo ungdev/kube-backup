@@ -25,8 +25,8 @@ RUN apk update && \
   apk del libressl-dev make g++ && \
   rm -rf /var/cache/apk/*
 
-RUN pip install ijson awscli
-RUN adduser -h /backup -s /sbin/nologin -D -g backup backup
+RUN pip install ijson awscl
+RUN echo "backup:x:1000570000:65533:backup:/backup:/sbin/nologin" >> /etc/passwd
 
 ENV KUBECTL_VERSION 1.12.0
 ENV KUBECTL_SHA256 ba0f8d5776d84ffef5ce5d5c31f8d892e0c13d073948d5bafbb5341ad68ef463
@@ -40,5 +40,7 @@ ENV PATH="/:${PATH}"
 
 COPY entrypoint.sh /
 WORKDIR /backup
+
 USER backup
+
 ENTRYPOINT ["/entrypoint.sh"]
