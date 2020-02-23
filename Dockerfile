@@ -25,7 +25,7 @@ RUN apk update && \
   apk del libressl-dev make g++ && \
   rm -rf /var/cache/apk/*
 
-RUN pip install ijson awscl
+RUN pip install ijson awscli
 RUN echo "backup:x:1000570000:65533:backup:/backup:/sbin/nologin" >> /etc/passwd
 
 ENV KUBECTL_VERSION 1.12.0
