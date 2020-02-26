@@ -23,10 +23,11 @@ RUN apk update && \
   make --directory git-crypt install && \
   rm -rf git-crypt && \
   apk del libressl-dev make g++ && \
-  rm -rf /var/cache/apk/*
-
-RUN pip install ijson awscli
-RUN echo "backup:x:1000570000:65533:backup:/backup:/sbin/nologin" >> /etc/passwd
+  rm -rf /var/cache/apk/* && \
+  pip install ijson awscli && \
+  adduser -Ds -u 1000 /bin/ash backup && \
+  chown -R root:root /backup && \
+  chmod -R g=u /backup
 
 ENV KUBECTL_VERSION 1.12.0
 ENV KUBECTL_SHA256 ba0f8d5776d84ffef5ce5d5c31f8d892e0c13d073948d5bafbb5341ad68ef463
@@ -41,6 +42,6 @@ ENV PATH="/:${PATH}"
 COPY entrypoint.sh /
 WORKDIR /backup
 
-USER backup
+USER 1000
 
 ENTRYPOINT ["/entrypoint.sh"]
