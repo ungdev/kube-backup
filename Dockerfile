@@ -1,5 +1,7 @@
 FROM alpine:3.7
 
+WORKDIR /backup
+
 RUN apk update && \
   apk add --update \
     bash \
@@ -40,7 +42,6 @@ RUN echo "${KUBECTL_SHA256}  kubectl" | sha256sum -c - || exit 10
 ENV PATH="/:${PATH}"
 
 COPY entrypoint.sh /
-WORKDIR /backup
 
 USER 1000
 
