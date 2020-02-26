@@ -25,7 +25,7 @@ RUN apk update && \
   apk del libressl-dev make g++ && \
   rm -rf /var/cache/apk/* && \
   pip install ijson awscli && \
-  adduser -Ds -u 1000 /bin/ash backup && \
+  adduser -D -u 1000 -s /bin/ash backup && \
   chown -R root:root /backup && \
   chmod -R g=u /backup
 
