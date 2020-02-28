@@ -36,6 +36,7 @@ RUN apk update && \
 RUN adduser -D -u 1000 -s /bin/ash backup && \
     chown -R root:root /backup && \
     chmod -R g=u /backup && \
+    chmod g=u /etc/passwd && \
     cd /usr/local/bin && \
     curl -SL ${KUBECTL_URI} -o kubectl && \
     chmod +x kubectl && \
