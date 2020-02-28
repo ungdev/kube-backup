@@ -1,12 +1,9 @@
 #!/bin/bash -e
 
 if ! whoami &> /dev/null; then
-  echo "a"
   if [ -w /etc/passwd ]; then
     echo "${USER_NAME:-default}:x:$(id -u):0:${USER_NAME:-default} user:${HOME}:/sbin/nologin" >> /etc/passwd
-  else
   fi
-else
 fi
 
 if [ -z "$NAMESPACES" ]; then
