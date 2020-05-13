@@ -38,6 +38,9 @@ cd "$GIT_REPO_PATH"
 mkdir -p "$GIT_REPO_PATH/$GIT_PREFIX_PATH"
 cd "$GIT_REPO_PATH/$GIT_PREFIX_PATH"
 
+# Deletes everything to have a mirror configuration at the end
+rm -rfv *
+
 if [ "$GITCRYPT_ENABLE" = "true" ]; then
     if [ -f "$GITCRYPT_PRIVATE_KEY" ]; then
         gpg --allow-secret-key-import --import "$GITCRYPT_PRIVATE_KEY"
